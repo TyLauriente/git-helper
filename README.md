@@ -9,11 +9,21 @@ The tool can
 
 ### *Currently only supporting windows*
 
+#### Add paths to your `Path` environment variable
+1. Search for and select **Edit the System Environment variables** in the windows search bar
+2. On the System Properties window that pops up, select **Environment Variables...**
+3. Under **User Variables**, select the `Path` variable
+4. Click on new and paste in the path to your program
+
+
+#### Steps for setup
 1. To get started, download and extract both the gith.py and gith.bat files to your install directory of choice.
-2. Run `setx path "%PATH%;C:\path\to\directory\"` (ONLY IN COMMAND PROMPT, other shells can break path) to add the path of the program to your main Path environment variable. This allows the `gith` command to work globally across your shell.
+2. Add your install directory to your `Path` environment variable. This allows the `gith` command to work globally across your shell.
 3. Run `git config --global --add safe.directory '*'`
 4. Run `python -m pip install pyautogui`
 5. Run `python -m pip install pytesseract`
+6. Install `tesseract-ocr-w64-setup.exe`
+7. Add `C:\Program Files\Tesseract-OCR` to your `Path` environment variable
 
 
 ### Usage:
@@ -55,13 +65,19 @@ The tool can
 * `gith build`
   * This command will open the first Visual Studio with the first .sln file found in the build folder located inside the repo of your current profile. 
   * Then it will navigate to the configuration manager, and select Release configuration.
-  * Finally, it will select distributed solution build.
+  * Finally, it will select distributed solution build if available, otherwise normal build.
   * This means this command can be paried with others so that no input is needed from the time of branching to building
 
-## Chaining shortcuts
+### Chaining shortcuts
 * You can chain shortcuts together by calling `gith` multiple times within a shortcut. 
-* To do this use the `&&` operator.
+* To do this in command prompt, use the `&&` operator
+* To do this in powershell, use the `;` operator
+* For chaining commands within a shortcut, you have to use the `&&` operator since `gith` uses cmd as its underlying shell
 * An example of this would be to create a shortcut for building a project solution, lets call this shortcut `build-solution`.
 * Now what if you would like to fetch latest main and build the solution in one command.
 * You can accomplish this by creating another shortcut called `fetch-build-solution`. This can be accomplished using the following command `gith shortcut fetch-build-solution "gith fetch && gith shortcut build-solution`.
 * Now that this shortcut is saved, to run both a fetch and a build-solution, simply run `gith shortcut fetch-build-solution` and it will run both commands.
+
+### Non-shortcut chaining
+* You can also simply chain commands without creating shortcuts
+* For example, you can run `gith branch testBranchName && gith shortcut win32 && gith shortcut build`
