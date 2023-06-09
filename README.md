@@ -11,7 +11,9 @@ The tool can
 
 1. To get started, download and extract both the gith.py and gith.bat files to your install directory of choice.
 2. Run `setx path "%PATH%;C:\path\to\directory\"` (ONLY IN COMMAND PROMPT, other shells can break path) to add the path of the program to your main Path environment variable. This allows the `gith` command to work globally across your shell.
-3. Run git config --global --add safe.directory '*'
+3. Run `git config --global --add safe.directory '*'`
+4. Run `python -m pip install pyautogui`
+5. Run `python -m pip install pytesseract`
 
 
 ### Usage:
